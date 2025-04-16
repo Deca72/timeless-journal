@@ -1,0 +1,97 @@
+import html2canvas from "html2canvas";
+
+export const downloadImageWithCaption = async (imageUrl, caption, imageName) => {
+  try {
+    let isMobile = false;
+
+    // ✅ Only run this in the browser
+    if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+      isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    }
+
+    const container = document.createElement("div");
+    container.style.width = "600px";
+    container.style.padding = "20px";
+    container.style.backgroundColor = "#ffffff";
+    container.style.display = "flex";
+    container.style.flexDirection = "column";
+    container.style.alignItems = "center";
+    container.style.justifyContent = "center";
+    container.style.fontFamily = "'Arial', sans-serif";
+    container.style.fontSize = "16px";
+    container.style.textAlign = "center";
+    container.style.color = "#000000";
+    container.style.border = "2px solid #000";
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = imageUrl;
+    img.style.width = "500px";
+    img.style.borderRadius = "10px";
+    img.style.marginBottom = "15px";
+
+    const text = document.createElement("p");
+    text.innerText = caption;
+    text.style.maxWidth = "500px";
+    text.style.margin = "0";
+    text.style.padding = "10px";
+    text.style.backgroundColor = "#ffffff";
+    text.style.color = "#000000";
+    text.style.borderRadius = "8px";
+    text.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.1)";
+
+    container.appendChild(img);
+    container.appendChild(text);
+
+    img.onload = async () => {
+      document.body.appendChild(container);
+
+      const canvas = await html2canvas(container, { scale: 2, useCORS: true });
+      document.body.removeChild(container);
+
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          console.error("❌ Failed to generate blob.");
+          alert("Could not generate image.");
+          return;
+        }
+
+        const blobUrl = URL.createObjectURL(blob);
+
+        if (isMobile) {
+          const newTab = window.open();
+          if (newTab) {
+            newTab.document.write(`
+              <html>
+                <head><title>Save Your Journal</title></head>
+                <body style="margin:0; padding:0; text-align:center; background:white;">
+                  <p style="font-family:sans-serif; font-size:16px; margin-top:20px;">
+                    📸 Tap and hold the image below to save it
+                  </p>
+                  <img src="${blobUrl}" style="max-width:100%; padding:10px;" />
+                </body>
+              </html>
+            `);
+          } else {
+            alert("Popup blocked. Please allow popups to save your image.");
+          }
+        } else {
+          const link = document.createElement("a");
+          link.href = blobUrl;
+          link.download = `${imageName}-journal.png`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      });
+    };
+
+    img.onerror = () => {
+      console.error("❌ Image failed to load:", imageUrl);
+      alert("Failed to load image. Check if the URL is correct.");
+    };
+  } catch (error) {
+    console.error("❌ Error downloading image:", error);
+    alert("Failed to download image. Try again.");
+  }
+};
