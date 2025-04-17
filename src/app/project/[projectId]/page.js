@@ -437,9 +437,8 @@ const handleTranslate = async (selectedLang) => {
   type="date"
   value={selectedDate}
   onChange={(e) => setSelectedDate(e.target.value)}
-  className="appearance-none p-2 border border-gray-400 rounded w-40 bg-white text-black dark:bg-gray-800 dark:text-white"
+  className="p-2 border border-gray-400 rounded w-40 bg-white text-black dark:bg-gray-800 dark:text-white"
 />
-
 
 
     {/* Location Input */}
