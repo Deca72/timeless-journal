@@ -24,8 +24,9 @@ export async function POST(req) {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
+      success_url: "https://mytimelessjournal.com/success?session_id={CHECKOUT_SESSION_ID}",
+cancel_url: "https://mytimelessjournal.com/cancel",
+
     });
 
     return new Response(JSON.stringify({ url: session.url }), {
