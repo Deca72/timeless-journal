@@ -21,9 +21,27 @@ body {
   font-size: 16px; /* mobile default */
 }
 
+/* Desktop overrides for font scaling */
 @media (min-width: 1024px) {
   body {
-    font-size: 15px; /* reduce slightly on desktop */
+    font-size: 14px; /* noticeable reduction */
+  }
+
+  h1 {
+    font-size: 2rem; /* Override large headers */
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  button {
+    font-size: 0.9rem;
   }
 }
+
 
