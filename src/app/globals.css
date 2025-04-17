@@ -19,15 +19,34 @@ body {
   background: var(--background);
   font-family: 'Inter', sans-serif;
   font-size: 16px; /* mobile default */
-  line-height: 1.5;
-  transition: all 0.3s ease;
 }
 
-/* ⬇ Global scale-down on desktop */
 @media (min-width: 1024px) {
-  html {
-    font-size: 15px; /* globally reduce all rem-based elements */
-    /* Optional: slightly scale down everything */
-    /* transform: scale(0.98); */
+  body {
+    font-size: 13.5px; /* smaller on desktop */
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+  }
+
+  button {
+    font-size: 0.85rem;
+  }
+
+  input, select, textarea {
+    font-size: 0.85rem;
   }
 }
