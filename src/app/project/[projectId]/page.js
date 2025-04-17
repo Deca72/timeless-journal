@@ -447,13 +447,14 @@ const handleTranslate = async (selectedLang) => {
 
 
     {/* Location Input */}
-    <input
-      type="text"
-      value={selectedLocation}
-      onChange={(e) => setSelectedLocation(e.target.value)}
-      placeholder="Enter Location"
-      className="p-2 border border-gray-500 rounded w-60 bg-gray-800 text-white"
-    />
+<input
+  type="text"
+  value={selectedLocation}
+  onChange={(e) => setSelectedLocation(e.target.value)}
+  placeholder="Enter Location"
+  className="p-2 border border-gray-400 rounded w-60 bg-white text-black dark:bg-white dark:text-black appearance-none"
+/>
+
 
     {/* Upload Photo */}
     <button 
