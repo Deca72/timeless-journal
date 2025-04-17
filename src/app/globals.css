@@ -3,20 +3,27 @@
 @tailwind utilities;
 
 :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: 'Inter', sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px; /* mobile default */
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 15px; /* reduce slightly on desktop */
+  }
 }
 
