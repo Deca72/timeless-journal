@@ -99,7 +99,7 @@ export default function Dashboard() {
       return;
     }
   
-    // ✅ Generate a clean project ID from the name
+    // ✅ Clean project ID from the name
     const safeProjectId = projectName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "_")
@@ -107,6 +107,7 @@ export default function Dashboard() {
       .slice(0, 50);
   
     try {
+      // ✅ Save under nested path: /users/{userId}/projects/{projectId}
       const projectRef = doc(db, `users/${user.uid}/projects`, safeProjectId);
       await setDoc(projectRef, {
         name: projectName,
@@ -116,7 +117,7 @@ export default function Dashboard() {
           writingStyle: writingStyle || "Not Set",
           wordCount: wordCount || "100",
           genre: genre || "Not Set",
-        }
+        },
       });
   
       const newProject = {
@@ -127,7 +128,7 @@ export default function Dashboard() {
           writingStyle: writingStyle || "Not Set",
           wordCount: wordCount || "100",
           genre: genre || "Not Set",
-        }
+        },
       };
   
       setProjects((prev) => [...prev, newProject]);
@@ -139,6 +140,8 @@ export default function Dashboard() {
       alert("Something went wrong while creating the project.");
     }
   };
+  
+  
   
 
   return (

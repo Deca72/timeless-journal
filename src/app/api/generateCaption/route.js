@@ -3,6 +3,8 @@ import fetch from "node-fetch";
 import { db } from "../../lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
+export const runtime = "nodejs";
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Ensure this is set in .env.local
 });
