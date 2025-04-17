@@ -1,11 +1,16 @@
 [
   {
-    "origin": ["http://localhost:3000", "https://firebasestorage.googleapis.com"],
+    "origin": [
+      "http://localhost:3000",
+      "https://www.mytimelessjournal.com"
+    ],
     "method": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     "maxAgeSeconds": 3600,
-    "responseHeader": ["Content-Type", "Authorization", "x-goog-meta-owner", "x-goog-meta-user"]
+    "responseHeader": [
+      "Content-Type",
+      "Authorization",
+      "x-goog-meta-owner",
+      "x-goog-meta-user"
+    ]
   }
 ]
-
-  
-  
