@@ -23,30 +23,30 @@ body {
 
 @media (min-width: 1024px) {
   body {
-    font-size: 13.5px; /* smaller on desktop */
+    font-size: 13px; /* smaller on desktop */
   }
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   button {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   input, select, textarea {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 }
