@@ -4,6 +4,7 @@ import { db } from "../../lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 export const runtime = "nodejs";
+export const maxDuration = 25; // Allow up to 25 seconds
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Ensure this is set in .env.local
