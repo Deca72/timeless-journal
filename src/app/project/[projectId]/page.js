@@ -433,13 +433,13 @@ const handleTranslate = async (selectedLang) => {
       <p><strong>Genre:</strong> {userPreferences.genre || "Not Set"}</p>
     </div>
 
-    {/* Date Input */}
     <input
-      type="date"
-      value={selectedDate}
-      onChange={(e) => setSelectedDate(e.target.value)}
-      className="p-2 border border-gray-500 rounded w-40 bg-gray-800 text-white"
-    />
+  type="date"
+  value={selectedDate}
+  onChange={(e) => setSelectedDate(e.target.value)}
+  className="p-2 border border-gray-400 rounded w-40 bg-white text-black dark:bg-gray-800 dark:text-white"
+/>
+
 
     {/* Location Input */}
     <input
