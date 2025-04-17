@@ -421,7 +421,7 @@ const handleTranslate = async (selectedLang) => {
     {/* Edit Settings */}
     <button 
       onClick={() => setShowSettingsModal(true)} 
-      className="px-4 py-2 bg-yellow rounded-md text-sm hover:bg-yellow-600 transition"
+      className="px-4 py-2 bg-yellow-400 rounded-md text-sm hover:bg-yellow-600 transition"
     >
       Edit Settings
     </button>
