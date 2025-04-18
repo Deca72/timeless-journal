@@ -6,6 +6,8 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "src/app/lib/firebase";
 import Navbar from "src/app/components/Navbar";
 
+
+
 export default function LandingPage() {
   const [showLogin, setShowLogin] = useState(false);
   const [email, setEmail] = useState("");
@@ -32,6 +34,8 @@ export default function LandingPage() {
   };
 
   return (
+    
+    
     <div className="bg-white text-black min-h-screen overflow-y-auto w-full max-w-[100vw] overflow-x-hidden">
       {user && <Navbar />}
 
