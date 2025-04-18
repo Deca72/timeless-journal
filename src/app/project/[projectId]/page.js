@@ -463,6 +463,12 @@ const handleTranslate = async (selectedLang) => {
     >
       Upload Photo
     </button>
+    {uploading && (
+  <p className="mt-2 text-sm text-yellow-400 animate-pulse">
+    ⏳ Uploading and generating your caption...
+  </p>
+)}
+
     
 
     {/* Delete Project */}

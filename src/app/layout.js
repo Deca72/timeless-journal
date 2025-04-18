@@ -1,5 +1,18 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../app/globals.css";
+import { Analytics } from '@vercel/analytics/react';
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics /> {/* ✅ Add this at the bottom of your layout */}
+      </body>
+    </html>
+  );
+}
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
