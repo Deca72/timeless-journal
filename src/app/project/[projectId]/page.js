@@ -602,7 +602,7 @@ const handleTranslate = async (selectedLang) => {
     className="w-1/2 p-6 bg-white text-gray-800 flex flex-col items-center"
     style={{
       fontFamily: userPreferences.fontStyle || "'Dancing Script', cursive",
-      fontSize: "1.9rem", // 🔥 increased from 1.2rem to 1.6rem
+      fontSize: "2.8rem", // 🔥 increased from 1.2rem to 1.6rem
       lineHeight: "1.75rem", // optional, makes the paragraph breathe
       maxWidth: "90%", // optional, keeps it readable and centered
     }}
