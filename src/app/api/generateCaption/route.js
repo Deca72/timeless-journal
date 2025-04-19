@@ -43,7 +43,8 @@ async function getImageObjects(imageUrl) {
 
 // ✅ Function to get image description using Hugging Face API
 async function getImageDescription(imageUrl) {
-  const HF_API_URL = "https://api-inference..co/models/Salesforce/blip-image-captioning-base";
+  const HF_API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large";
+
   const HF_API_KEY = process.env._API_KEY;
 
   try {
