@@ -15,6 +15,7 @@ async function getImageObjects(imageUrl) {
   const HF_API_URL = "https://api-inference.huggingface.co/models/facebook/detr-resnet-50";
   const HF_API_KEY = process.env.HUGGINGFACE_API_KEY;
 
+
   try {
     const response = await fetch(HF_API_URL, {
       method: "POST",
@@ -42,8 +43,8 @@ async function getImageObjects(imageUrl) {
 
 // ✅ Function to get image description using Hugging Face API
 async function getImageDescription(imageUrl) {
-  const HF_API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base";
-  const HF_API_KEY = process.env.HUGGINGFACE_API_KEY;
+  const HF_API_URL = "https://api-inference..co/models/Salesforce/blip-image-captioning-base";
+  const HF_API_KEY = process.env._API_KEY;
 
   try {
     const response = await fetch(HF_API_URL, {
