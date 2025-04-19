@@ -45,7 +45,8 @@ async function getImageObjects(imageUrl) {
 async function getImageDescription(imageUrl) {
   const HF_API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large";
 
-  const HF_API_KEY = process.env._API_KEY;
+  const HF_API_KEY = process.env.HUGGINGFACE_API_KEY; // ✅ Correct
+
 
   try {
     const response = await fetch(HF_API_URL, {
@@ -142,6 +143,7 @@ function enforceWordCount(text, min, max) {
 
 // ✅ Generate AI-Powered Captions with Object Validation
 export async function POST(req) {
+  console.log("🔥 Loaded HF Key:", process.env.HUGGINGFACE_API_KEY ? "✅ present" : "❌ missing");
   try {
     const { imageUrl, writingStyle, wordCount, genre, date, location, userId, projectId } = await req.json();
     console.log("📩 Incoming Request:", { imageUrl, writingStyle, wordCount, genre, date, location, userId, projectId });
