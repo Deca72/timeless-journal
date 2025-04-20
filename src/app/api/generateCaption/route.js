@@ -1,6 +1,6 @@
 import { OpenAI } from "openai";
 import fetch from "node-fetch";
-import { db } from "../../lib/firebase";
+import { adminDb } from "../../lib/firebase-admin";
 import { collection, getDocs } from "firebase/firestore";
 
 export const runtime = "nodejs";
@@ -103,14 +103,20 @@ async function fetchHistoricalEvents(date) {
 // ✅ Fetch past captions to maintain diary continuity
 async function getPastCaptions(userId, projectId) {
   try {
-    const captionsRef = collection(db, `users/${userId}/projects/${projectId}/images`);
-    const querySnapshot = await getDocs(captionsRef);
-    return querySnapshot.docs.map((doc) => doc.data().caption).join("\n\n");
+    const captionsRef = adminDb.collection("users")
+      .doc(userId)
+      .collection("projects")
+      .doc(projectId)
+      .collection("images");
+
+    const snapshot = await captionsRef.get();
+    return snapshot.docs.map(doc => doc.data().caption).join("\n\n");
   } catch (error) {
     console.error("❌ Error fetching past captions:", error);
     return "";
   }
 }
+
 
 // ✅ Helper: Trim or validate word count and finish cleanly
 function enforceWordCount(text, min, max) {
