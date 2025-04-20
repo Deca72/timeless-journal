@@ -599,14 +599,18 @@ const handleTranslate = async (selectedLang) => {
 
   {/* Right Page: Caption */}
   <div
-    className="w-1/2 p-6 bg-white text-gray-800 flex flex-col items-center"
-    style={{
-      fontFamily: userPreferences.fontStyle || "'Dancing Script', cursive",
-      fontSize: "2.8rem", // 🔥 increased from 1.2rem to 2.8rem
-      lineHeight: "1.75rem", // optional, makes the paragraph breathe
-      maxWidth: "90%", // optional, keeps it readable and centered
-    }}
-  >
+  className="w-1/2 p-6 bg-white text-gray-800 flex flex-col items-center"
+  style={{
+    fontFamily: userPreferences.fontStyle || "'Dancing Script', cursive",
+    fontSize: "36px",       // 🔥 This will finally feel big enough
+    lineHeight: "48px",
+    fontWeight: 500,
+    maxWidth: "90%",
+    textAlign: "center",
+  }}
+>
+
+
     {editingCaptionName === name ? (
       <>
         <textarea
