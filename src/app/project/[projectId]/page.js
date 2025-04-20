@@ -602,14 +602,12 @@ const handleTranslate = async (selectedLang) => {
   className="w-1/2 p-6 bg-white text-gray-800 flex flex-col items-center"
   style={{
     fontFamily: userPreferences.fontStyle || "'Dancing Script', cursive",
-    fontSize: "36px",       // 🔥 This will finally feel big enough
-    lineHeight: "48px",
-    fontWeight: 500,
+    fontSize: "36px",        // ⬆️ From 28px to 36px
+    lineHeight: "48px",      // ⬆️ From 36px to 48px
     maxWidth: "90%",
-    textAlign: "center",
+    textAlign: "center",     // ✅ Optional: keeps long lines visually centered
   }}
 >
-
 
     {editingCaptionName === name ? (
       <>
