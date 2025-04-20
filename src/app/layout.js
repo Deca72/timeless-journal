@@ -23,6 +23,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ Load Google Fonts for dropdown options */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Amatic+SC&family=Archivo&family=Crimson+Text&family=Fjalla+One&family=Inconsolata&family=Lobster&family=Merriweather&family=Noto+Sans&family=Noto+Serif&family=Playfair+Display&family=Poppins&family=Raleway&family=Roboto&family=Rubik&family=Source+Serif+Pro&family=Space+Mono&family=Zeyada&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}>
         {children}
         <Analytics /> {/* ✅ Vercel Analytics */}
