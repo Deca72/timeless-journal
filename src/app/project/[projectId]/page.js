@@ -37,6 +37,8 @@ const [showExportModal, setShowExportModal] = useState(false);
 const [selectedExportType, setSelectedExportType] = useState(""); // postcards, calendar, book
 const [selectedForExport, setSelectedForExport] = useState({});
 const [selectedLang, setSelectedLang] = useState("");
+const [captionStyles, setCaptionStyles] = useState({});
+
 
 
 
@@ -664,7 +666,21 @@ console.log("🧩 Current background style in userPreferences:", userPreferences
         </div>
       </>
     ) : (
-      <p className="leading-relaxed text-center">{caption}</p>
+      <p
+  className="leading-relaxed text-center"
+  style={{
+    ...captionStyles[name],
+    fontFamily: fontMap[userPreferences.fontStyle] || "'Dancing Script', cursive",
+    fontSize: captionStyles[name]?.fontSize || "28px",
+    fontWeight: captionStyles[name]?.fontWeight || "normal",
+    textDecoration: captionStyles[name]?.textDecoration || "none",
+    lineHeight: "48px",
+    maxWidth: "90%",
+  }}
+>
+  {caption}
+</p>
+
     )}
   </div>
 </div>
@@ -858,6 +874,63 @@ console.log("🧩 Current background style in userPreferences:", userPreferences
   ⬇️ Download
 </button>
 
+{/* 🔤 Font Style Controls */}
+<div className="flex gap-2 items-center">
+  <label className="text-sm text-black">Font Size:</label>
+  <select
+    value={captionStyles[name]?.fontSize || "28px"}
+    onChange={(e) =>
+      setCaptionStyles((prev) => ({
+        ...prev,
+        [name]: { ...prev[name], fontSize: e.target.value },
+      }))
+    }
+    className="px-2 py-1 bg-white text-black rounded border text-sm"
+  >
+    <option value="20px">Small</option>
+    <option value="28px">Default</option>
+    <option value="36px">Large</option>
+  </select>
+
+  <button
+    onClick={() =>
+      setCaptionStyles((prev) => ({
+        ...prev,
+        [name]: {
+          ...prev[name],
+          fontWeight: prev[name]?.fontWeight === "bold" ? "normal" : "bold",
+        },
+      }))
+    }
+    className={`px-2 py-1 rounded border text-sm ${
+      captionStyles[name]?.fontWeight === "bold"
+        ? "bg-yellow-500 text-white"
+        : "bg-white text-black"
+    }`}
+  >
+    B
+  </button>
+
+  <button
+    onClick={() =>
+      setCaptionStyles((prev) => ({
+        ...prev,
+        [name]: {
+          ...prev[name],
+          textDecoration:
+            prev[name]?.textDecoration === "underline" ? "none" : "underline",
+        },
+      }))
+    }
+    className={`px-2 py-1 rounded border text-sm ${
+      captionStyles[name]?.textDecoration === "underline"
+        ? "bg-yellow-500 text-white"
+        : "bg-white text-black"
+    }`}
+  >
+    U
+  </button>
+</div>
 
   {/* Delete Button */}
   <button
