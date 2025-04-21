@@ -424,7 +424,7 @@ const fontMap = {
   crimson: "'Crimson Text', serif",
 };
 
-
+console.log("🧠 Loaded font style:", userPreferences.fontStyle);
   return (
     <div className="min-h-screen bg-white text-black flex flex-col items-center p-6">
 
@@ -623,7 +623,7 @@ const fontMap = {
       className="rounded-lg w-full h-auto object-cover"
     />
   </div>
-  console.log("🧠 Loaded font style:", userPreferences.fontStyle);
+  
 
   {/* Right Page: Caption */}
   <div
