@@ -1,6 +1,5 @@
 import html2canvas from "html2canvas";
 
-// Font style mapping
 const fontMap = {
   serif: "serif",
   "sans-serif": "sans-serif",
@@ -31,7 +30,7 @@ const fontMap = {
 
 const backgroundStyleMap = {
   default: "#ffffff",
-  parchment: "#fef9e7",         // 🟨 Light parchment yellow
+  parchment: "#fef9e7",
   retro: "#fdf6e3",
   modern: "#eeeeee",
   photojournal: "#fdfdfd",
@@ -47,9 +46,13 @@ const backgroundStyleMap = {
   sunset: "#ffe5b4",
 };
 
-
-
-export const downloadImageWithCaption = async (imageUrl, caption, imageName, fontKey, backgroundStyleKey = "") => {
+export const downloadImageWithCaption = async (
+  imageUrl,
+  caption,
+  imageName,
+  fontKey,
+  backgroundStyleKey = ""
+) => {
   try {
     let isMobile = false;
 
@@ -58,23 +61,34 @@ export const downloadImageWithCaption = async (imageUrl, caption, imageName, fon
     }
 
     const fontFamily = fontMap[fontKey] || "'Dancing Script', cursive";
+    const backgroundColor = backgroundStyleMap[backgroundStyleKey] || "#ffffff";
 
-    // ✅ Wait until the font is loaded
+    // Load the font
     await document.fonts.load(`16px ${fontFamily}`);
     await document.fonts.ready;
 
+    // 🔍 Debug log
+    console.log("🧠 Exporting with background style:", backgroundStyleKey);
+
     const container = document.createElement("div");
-    container.style.width = "600px";
-    container.style.padding = "20px";
-    container.style.backgroundColor = backgroundStyleMap[backgroundStyleKey] || "#ffffff";
-    container.style.display = "flex";
-    container.style.flexDirection = "column";
-    container.style.alignItems = "center";
-    container.style.justifyContent = "center";
-    container.style.fontFamily = fontFamily;
-    container.style.fontSize = "18px";
-    container.style.textAlign = "center";
-    container.style.color = "#000000";
+container.style.position = "fixed";
+container.style.top = "-10000px"; // Way off-screen
+container.style.left = "0";
+container.style.zIndex = "-9999";
+container.style.width = "600px";
+container.style.padding = "20px";
+container.style.background = backgroundColor;
+
+container.style.display = "flex";
+container.style.flexDirection = "column";
+container.style.alignItems = "center";
+container.style.justifyContent = "center";
+container.style.fontFamily = fontFamily;
+container.style.fontSize = "18px";
+container.style.textAlign = "center";
+container.style.color = "#000000";
+container.style.borderRadius = "16px";
+
 
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -88,10 +102,9 @@ export const downloadImageWithCaption = async (imageUrl, caption, imageName, fon
     text.style.maxWidth = "500px";
     text.style.margin = "0";
     text.style.padding = "10px";
-    text.style.backgroundColor = backgroundStyleMap[backgroundStyleKey] || "#ffffff";
+    text.style.backgroundColor = "transparent"; // ✅ Let parent background show through
     text.style.color = "#000000";
     text.style.borderRadius = "8px";
-    text.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.1)";
     text.style.fontFamily = fontFamily;
 
     container.appendChild(img);
@@ -100,8 +113,12 @@ export const downloadImageWithCaption = async (imageUrl, caption, imageName, fon
     img.onload = async () => {
       document.body.appendChild(container);
 
-      const canvas = await html2canvas(container, { scale: 2, useCORS: true });
-      document.body.removeChild(container);
+// ✅ TEMPORARY OUTLINE TRICK to force render background
+container.style.outline = "9999px solid " + backgroundColor;
+
+const canvas = await html2canvas(container, { scale: 2, useCORS: true });
+document.body.removeChild(container);
+
 
       canvas.toBlob((blob) => {
         if (!blob) {

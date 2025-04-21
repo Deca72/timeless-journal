@@ -425,6 +425,8 @@ const fontMap = {
 };
 
 console.log("🧠 Loaded font style:", userPreferences.fontStyle);
+console.log("🧩 Current background style in userPreferences:", userPreferences.backgroundStyle);
+
   return (
     <div className="min-h-screen bg-white text-black flex flex-col items-center p-6">
 
@@ -838,6 +840,7 @@ console.log("🧠 Loaded font style:", userPreferences.fontStyle);
 </div>
 
 
+
   {/* Download Button */}
   <button
   onClick={() =>
@@ -846,9 +849,10 @@ console.log("🧠 Loaded font style:", userPreferences.fontStyle);
       caption,
       "journal-entry",
       userPreferences.fontStyle,
-      userPreferences.backgroundStyle // ✅ added this
+      backgroundStyle // ✅ Comes from the image itself
     )
   }
+  
   className="px-4 py-2 bg-black text-white rounded hover:bg-green-600 transition"
 >
   ⬇️ Download
