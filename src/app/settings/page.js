@@ -3,10 +3,39 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { auth, db } from "src/app/lib/firebase"; // Adjusted import path
+import { auth, db } from "src/app/lib/firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import Navbar from "src/app/components/Navbar"; // Adjusted import path
+import Navbar from "src/app/components/Navbar";
+
+// Optional: Font style mapping (useful later for previews or debugging)
+const fontMap = {
+  serif: "serif",
+  "sans-serif": "sans-serif",
+  cursive: "cursive",
+  monospace: "monospace",
+  dancing: "'Dancing Script', cursive",
+  typewriter: "'Courier New', monospace",
+  fancy: "'Great Vibes', cursive",
+  playfair: "'Playfair Display', serif",
+  merriweather: "'Merriweather', serif",
+  raleway: "'Raleway', sans-serif",
+  lobster: "'Lobster', cursive",
+  abril: "'Abril Fatface', cursive",
+  poppins: "'Poppins', sans-serif",
+  roboto: "'Roboto', sans-serif",
+  inconsolata: "'Inconsolata', monospace",
+  zeyada: "'Zeyada', cursive",
+  archivo: "'Archivo', sans-serif",
+  "noto-serif": "'Noto Serif', serif",
+  "noto-sans": "'Noto Sans', sans-serif",
+  "source-serif": "'Source Serif Pro', serif",
+  rubik: "'Rubik', sans-serif",
+  "space-mono": "'Space Mono', monospace",
+  amatic: "'Amatic SC', cursive",
+  fjalla: "'Fjalla One', sans-serif",
+  crimson: "'Crimson Text', serif",
+};
 
 export default function Settings() {
   const router = useRouter();
@@ -35,31 +64,31 @@ export default function Settings() {
     if (docSnap.exists()) {
       const data = docSnap.data();
       setPreferences({
-        writingStyle: data.preferences?.writingStyle || "",  // ✅ Load exactly what they chose
+        writingStyle: data.preferences?.writingStyle || "",
         wordCount: data.preferences?.wordCount || "100",
-        genre: data.preferences?.genre || ""  // ✅ Load exactly what they chose
+        genre: data.preferences?.genre || "",
+        backgroundStyle: data.preferences?.backgroundStyle || "",
+        fontStyle: data.preferences?.fontStyle || ""
       });
     }
   };
-  
 
   const handleSavePreferences = async () => {
     if (!user) return;
-  
+
     const userRef = doc(db, "users", user.uid);
-    await setDoc(userRef, { 
-      preferences: { 
+    await setDoc(userRef, {
+      preferences: {
         wordCount: preferences.wordCount || "100",
-        writingStyle: preferences.writingStyle,  // ✅ Save exactly what the user selects
-        genre: preferences.genre,  // ✅ Save exactly what the user selects
+        writingStyle: preferences.writingStyle,
+        genre: preferences.genre,
         backgroundStyle: preferences.backgroundStyle || "",
         fontStyle: preferences.fontStyle || ""
-      } 
+      }
     }, { merge: true });
-  
+
     alert("Preferences saved!");
   };
-  
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -81,41 +110,40 @@ export default function Settings() {
             className="w-full p-2 mt-1 rounded bg-gray-700 text-white"
           >
             <option value="">Select a Writing Style</option>
-<option value="NORMAL">NORMAL</option>
-<option value="William Shakespeare">William Shakespeare</option>
-<option value="Jane Austen">Jane Austen</option>
-<option value="Leo Tolstoy">Leo Tolstoy</option>
-<option value="Haruki Murakami">Haruki Murakami</option>
-<option value="Stephen King">Stephen King</option>
-<option value="Paul Auster">Paul Auster</option>
-<option value="J.R.R. Tolkien">J.R.R. Tolkien</option>
-<option value="Agatha Christie">Agatha Christie</option>
-<option value="Raymond Chandler">Raymond Chandler</option>
-<option value="Arthur Conan Doyle">Arthur Conan Doyle</option>
-<option value="Isaac Asimov">Isaac Asimov</option>
-<option value="Philip K. Dick">Philip K. Dick</option>
-<option value="Ursula K. Le Guin">Ursula K. Le Guin</option>
-<option value="Emily Dickinson">Emily Dickinson</option>
-<option value="Gabriel García Márquez">Gabriel García Márquez</option>
-<option value="Virginia Woolf">Virginia Woolf</option>
-<option value="Ernest Hemingway">Ernest Hemingway</option>
-<option value="Charles Bukowski">Charles Bukowski</option>
-<option value="Clarice Lispector">Clarice Lispector</option>
-<option value="Franz Kafka">Franz Kafka</option>
-<option value="Zadie Smith">Zadie Smith</option>
-<option value="Kurt Vonnegut">Kurt Vonnegut</option>
-<option value="Octavia E. Butler">Octavia E. Butler</option>
-<option value="James Baldwin">James Baldwin</option>
-<option value="Margaret Atwood">Margaret Atwood</option>
-<option value="Roberto Bolaño">Roberto Bolaño</option>
-<option value="Truman Capote">Truman Capote</option>
-<option value="Rainer Maria Rilke">Rainer Maria Rilke</option>
-<option value="Jack Kerouac">Jack Kerouac</option>
-<option value="Jhumpa Lahiri">Jhumpa Lahiri</option>
-
+            <option value="NORMAL">NORMAL</option>
+            <option value="William Shakespeare">William Shakespeare</option>
+            <option value="Jane Austen">Jane Austen</option>
+            <option value="Leo Tolstoy">Leo Tolstoy</option>
+            <option value="Haruki Murakami">Haruki Murakami</option>
+            <option value="Stephen King">Stephen King</option>
+            <option value="Paul Auster">Paul Auster</option>
+            <option value="J.R.R. Tolkien">J.R.R. Tolkien</option>
+            <option value="Agatha Christie">Agatha Christie</option>
+            <option value="Raymond Chandler">Raymond Chandler</option>
+            <option value="Arthur Conan Doyle">Arthur Conan Doyle</option>
+            <option value="Isaac Asimov">Isaac Asimov</option>
+            <option value="Philip K. Dick">Philip K. Dick</option>
+            <option value="Ursula K. Le Guin">Ursula K. Le Guin</option>
+            <option value="Emily Dickinson">Emily Dickinson</option>
+            <option value="Gabriel García Márquez">Gabriel García Márquez</option>
+            <option value="Virginia Woolf">Virginia Woolf</option>
+            <option value="Ernest Hemingway">Ernest Hemingway</option>
+            <option value="Charles Bukowski">Charles Bukowski</option>
+            <option value="Clarice Lispector">Clarice Lispector</option>
+            <option value="Franz Kafka">Franz Kafka</option>
+            <option value="Zadie Smith">Zadie Smith</option>
+            <option value="Kurt Vonnegut">Kurt Vonnegut</option>
+            <option value="Octavia E. Butler">Octavia E. Butler</option>
+            <option value="James Baldwin">James Baldwin</option>
+            <option value="Margaret Atwood">Margaret Atwood</option>
+            <option value="Roberto Bolaño">Roberto Bolaño</option>
+            <option value="Truman Capote">Truman Capote</option>
+            <option value="Rainer Maria Rilke">Rainer Maria Rilke</option>
+            <option value="Jack Kerouac">Jack Kerouac</option>
+            <option value="Jhumpa Lahiri">Jhumpa Lahiri</option>
           </select>
 
-          {/* Word Count Input (Allow any number) */}
+          {/* Word Count Input */}
           <label className="block text-left mt-4">Max Word Count:</label>
           <input
             type="number"
@@ -134,7 +162,7 @@ export default function Settings() {
             className="w-full p-2 mt-1 rounded bg-gray-700 text-white"
           >
             <option value="">Select a Genre</option>
-            <option value="NONE">NONE</option> {/* ✅ New Option */}
+            <option value="NONE">NONE</option>
             <option value="Romance">Romance</option>
             <option value="Mystery">Mystery</option>
             <option value="Noir">Noir</option>
@@ -146,65 +174,61 @@ export default function Settings() {
           </select>
 
           {/* Background Style Dropdown */}
-<label className="block text-left mt-4">Background Style:</label>
-<select
-  value={preferences.backgroundStyle || ""}
-  onChange={(e) => setPreferences({ ...preferences, backgroundStyle: e.target.value })}
-  className="w-full p-2 mt-1 rounded bg-gray-700 text-white"
->
-<option value="">Default</option>
-<option value="parchment">Parchment</option>
-<option value="retro">Retro</option>
-<option value="modern">Modern</option>
-<option value="photojournal">Photo Journal</option>
-<option value="pastel">Pastel</option>
-<option value="sepia">Sepia</option>
-<option value="notebook">Notebook</option>
-<option value="midnight">Midnight</option>
-<option value="cream">Cream</option>
-<option value="forest">Forest</option>
-<option value="corkboard">Corkboard</option>
-<option value="canvas">Canvas</option>
-<option value="foggy">Foggy</option>
-<option value="sunset">Sunset</option>
+          <label className="block text-left mt-4">Background Style:</label>
+          <select
+            value={preferences.backgroundStyle || ""}
+            onChange={(e) => setPreferences({ ...preferences, backgroundStyle: e.target.value })}
+            className="w-full p-2 mt-1 rounded bg-gray-700 text-white"
+          >
+            <option value="">Default</option>
+            <option value="parchment">Parchment</option>
+            <option value="retro">Retro</option>
+            <option value="modern">Modern</option>
+            <option value="photojournal">Photo Journal</option>
+            <option value="pastel">Pastel</option>
+            <option value="sepia">Sepia</option>
+            <option value="notebook">Notebook</option>
+            <option value="midnight">Midnight</option>
+            <option value="cream">Cream</option>
+            <option value="forest">Forest</option>
+            <option value="corkboard">Corkboard</option>
+            <option value="canvas">Canvas</option>
+            <option value="foggy">Foggy</option>
+            <option value="sunset">Sunset</option>
+          </select>
 
-</select>
+          {/* Font Style Dropdown */}
+          <label className="block text-left mt-4">Font Style:</label>
+          <select
+            value={preferences.fontStyle || ""}
+            onChange={(e) => setPreferences({ ...preferences, fontStyle: e.target.value })}
+            className="w-full p-2 mt-1 rounded bg-gray-700 text-white"
+          >
+            <option value="">Default (Dancing Script)</option>
+            <option value="serif">Serif (Georgia, Times)</option>
+            <option value="sans-serif">Sans-Serif (Arial, Helvetica)</option>
+            <option value="typewriter">Typewriter (Courier New)</option>
+            <option value="fancy">Fancy (Great Vibes)</option>
+            <option value="playfair">Playfair Display</option>
+            <option value="merriweather">Merriweather</option>
+            <option value="raleway">Raleway</option>
+            <option value="lobster">Lobster</option>
+            <option value="abril">Abril Fatface</option>
+            <option value="poppins">Poppins</option>
+            <option value="roboto">Roboto</option>
+            <option value="inconsolata">Inconsolata</option>
+            <option value="zeyada">Zeyada</option>
+            <option value="archivo">Archivo</option>
+            <option value="noto-serif">Noto Serif</option>
+            <option value="noto-sans">Noto Sans</option>
+            <option value="source-serif">Source Serif Pro</option>
+            <option value="rubik">Rubik</option>
+            <option value="space-mono">Space Mono</option>
+            <option value="amatic">Amatic SC</option>
+            <option value="fjalla">Fjalla One</option>
+            <option value="crimson">Crimson Text</option>
+          </select>
 
-{/* Font Style Dropdown */}
-<label className="block text-left mt-4">Font Style:</label>
-<select
-  value={preferences.fontStyle || ""}
-  onChange={(e) => setPreferences({ ...preferences, fontStyle: e.target.value })}
-  className="w-full p-2 mt-1 rounded bg-gray-700 text-white"
->
-  <option value="">Default (Dancing Script)</option>
-  <option value="serif">Serif (Georgia, Times)</option>
-  <option value="sans-serif">Sans-Serif (Arial, Helvetica)</option>
-  <option value="typewriter">Typewriter (Courier New)</option>
-  <option value="fancy">Fancy (Great Vibes)</option>
-  <option value="playfair">Playfair Display</option>
-<option value="merriweather">Merriweather</option>
-<option value="raleway">Raleway</option>
-<option value="lobster">Lobster</option>
-<option value="abril">Abril Fatface</option>
-<option value="poppins">Poppins</option>
-<option value="roboto">Roboto</option>
-<option value="inconsolata">Inconsolata</option>
-<option value="zeyada">Zeyada</option>
-<option value="archivo">Archivo</option>
-<option value="noto-serif">Noto Serif</option>
-<option value="noto-sans">Noto Sans</option>
-<option value="source-serif">Source Serif Pro</option>
-<option value="rubik">Rubik</option>
-<option value="space-mono">Space Mono</option>
-<option value="amatic">Amatic SC</option>
-<option value="fjalla">Fjalla One</option>
-<option value="crimson">Crimson Text</option>
-</select>
-
-
-
-          {/* Save Button */}
           <button
             onClick={handleSavePreferences}
             className="mt-4 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white text-lg font-semibold"
@@ -212,7 +236,6 @@ export default function Settings() {
             Save Preferences
           </button>
 
-          {/* Logout Button */}
           <button
             onClick={handleLogout}
             className="mt-4 px-6 py-3 bg-red-500 hover:bg-red-600 rounded-lg text-white text-lg font-semibold"
