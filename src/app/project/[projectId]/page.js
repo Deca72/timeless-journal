@@ -52,12 +52,17 @@ const [captionStyles, setCaptionStyles] = useState({});
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) {
         router.push("/login");
+      } else if (!currentUser.emailVerified) {
+        alert("Please verify your email address before continuing.");
+        await auth.signOut();
+        router.push("/login");
       } else {
         setUser(currentUser);
         fetchProjectData(currentUser.uid, projectId);
         fetchUserImages(currentUser.uid, projectId);
       }
     });
+    
     return () => unsubscribe();
   }, [router, projectId]);
 

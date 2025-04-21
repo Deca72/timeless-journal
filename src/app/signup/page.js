@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth, db } from "../lib/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 
 export default function Signup() {
   const router = useRouter();
@@ -17,10 +18,14 @@ export default function Signup() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      // ✅ Add Firestore user doc with matching email format for Stripe lookup
+  
+      // ✅ Send verification with redirect back to your app
+      await sendEmailVerification(user, {
+        url: "https://mytimelessjournal.com/landing", // 🔁 Your landing page URL here
+      });
+  
       await setDoc(doc(db, "users", user.uid), {
-        email: user.email?.toLowerCase().trim(), // makes sure webhook can match this
+        email: user.email?.toLowerCase().trim(),
         name: "",
         isSubscribed: false,
         stripeCustomerId: null,
@@ -28,13 +33,14 @@ export default function Signup() {
         subscriptionStatus: "none",
         createdAt: serverTimestamp(),
       });
-
-      router.push("/landing");
-
+  
+      setError("✅ Sign up successful! Check your email and verify your address before logging in.");
     } catch (err) {
       setError(err.message);
     }
   };
+  
+  
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
