@@ -396,6 +396,33 @@ const handleTranslate = async (selectedLang) => {
     alert("Translation failed. Please try again.");
   }
 };
+const fontMap = {
+  serif: "serif",
+  "sans-serif": "sans-serif",
+  cursive: "cursive",
+  monospace: "monospace",
+  dancing: "'Dancing Script', cursive",
+  typewriter: "'Courier New', monospace",
+  fancy: "'Great Vibes', cursive",
+  playfair: "'Playfair Display', serif",
+  merriweather: "'Merriweather', serif",
+  raleway: "'Raleway', sans-serif",
+  lobster: "'Lobster', cursive",
+  abril: "'Abril Fatface', cursive",
+  poppins: "'Poppins', sans-serif",
+  roboto: "'Roboto', sans-serif",
+  inconsolata: "'Inconsolata', monospace",
+  zeyada: "'Zeyada', cursive",
+  archivo: "'Archivo', sans-serif",
+  "noto-serif": "'Noto Serif', serif",
+  "noto-sans": "'Noto Sans', sans-serif",
+  "source-serif": "'Source Serif Pro', serif",
+  rubik: "'Rubik', sans-serif",
+  "space-mono": "'Space Mono', monospace",
+  amatic: "'Amatic SC', cursive",
+  fjalla: "'Fjalla One', sans-serif",
+  crimson: "'Crimson Text', serif",
+};
 
 
   return (
@@ -596,17 +623,19 @@ const handleTranslate = async (selectedLang) => {
       className="rounded-lg w-full h-auto object-cover"
     />
   </div>
+  console.log("🧠 Loaded font style:", userPreferences.fontStyle);
 
   {/* Right Page: Caption */}
   <div
   className="w-1/2 p-6 bg-white text-gray-800 flex flex-col items-center"
   style={{
-    fontFamily: userPreferences.fontStyle || "'Dancing Script', cursive",
-    fontSize: "36px",        // ⬆️ From 28px to 36px
-    lineHeight: "48px",      // ⬆️ From 36px to 48px
+    fontFamily: fontMap[userPreferences.fontStyle] || "'Dancing Script', cursive",
+    fontSize: "36px",
+    lineHeight: "48px",
     maxWidth: "90%",
-    textAlign: "center",     // ✅ Optional: keeps long lines visually centered
+    textAlign: "center",
   }}
+  
 >
 
     {editingCaptionName === name ? (
@@ -811,7 +840,10 @@ const handleTranslate = async (selectedLang) => {
 
   {/* Download Button */}
   <button
-    onClick={() => downloadImageWithCaption(url, caption, name)}
+    onClick={() =>
+      downloadImageWithCaption(url, caption, "journal-entry", userPreferences.fontStyle)
+    }
+    
     className="px-4 py-2 bg-black text-white rounded hover:bg-green-600 transition"
   >
     ⬇️ Download

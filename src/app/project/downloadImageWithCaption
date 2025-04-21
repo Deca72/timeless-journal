@@ -1,13 +1,47 @@
 import html2canvas from "html2canvas";
 
-export const downloadImageWithCaption = async (imageUrl, caption, imageName) => {
+// Font style mapping
+const fontMap = {
+  serif: "serif",
+  "sans-serif": "sans-serif",
+  cursive: "cursive",
+  monospace: "monospace",
+  dancing: "'Dancing Script', cursive",
+  typewriter: "'Courier New', monospace",
+  fancy: "'Great Vibes', cursive",
+  playfair: "'Playfair Display', serif",
+  merriweather: "'Merriweather', serif",
+  raleway: "'Raleway', sans-serif",
+  lobster: "'Lobster', cursive",
+  abril: "'Abril Fatface', cursive",
+  poppins: "'Poppins', sans-serif",
+  roboto: "'Roboto', sans-serif",
+  inconsolata: "'Inconsolata', monospace",
+  zeyada: "'Zeyada', cursive",
+  archivo: "'Archivo', sans-serif",
+  "noto-serif": "'Noto Serif', serif",
+  "noto-sans": "'Noto Sans', sans-serif",
+  "source-serif": "'Source Serif Pro', serif",
+  rubik: "'Rubik', sans-serif",
+  "space-mono": "'Space Mono', monospace",
+  amatic: "'Amatic SC', cursive",
+  fjalla: "'Fjalla One', sans-serif",
+  crimson: "'Crimson Text', serif",
+};
+
+export const downloadImageWithCaption = async (imageUrl, caption, imageName, fontKey = "") => {
   try {
     let isMobile = false;
 
-    // ✅ Only run this in the browser
     if (typeof window !== "undefined" && typeof navigator !== "undefined") {
       isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     }
+
+    const fontFamily = fontMap[fontKey] || "'Dancing Script', cursive";
+
+    // ✅ Wait until the font is loaded
+    await document.fonts.load(`16px ${fontFamily}`);
+    await document.fonts.ready;
 
     const container = document.createElement("div");
     container.style.width = "600px";
@@ -17,11 +51,10 @@ export const downloadImageWithCaption = async (imageUrl, caption, imageName) => 
     container.style.flexDirection = "column";
     container.style.alignItems = "center";
     container.style.justifyContent = "center";
-    container.style.fontFamily = "'Arial', sans-serif";
-    container.style.fontSize = "16px";
+    container.style.fontFamily = fontFamily;
+    container.style.fontSize = "18px";
     container.style.textAlign = "center";
     container.style.color = "#000000";
-    container.style.border = "2px solid #000";
 
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -39,6 +72,7 @@ export const downloadImageWithCaption = async (imageUrl, caption, imageName) => 
     text.style.color = "#000000";
     text.style.borderRadius = "8px";
     text.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.1)";
+    text.style.fontFamily = fontFamily;
 
     container.appendChild(img);
     container.appendChild(text);
