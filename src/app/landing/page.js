@@ -62,53 +62,104 @@ export default function LandingPage() {
 
         
 
-        {/* Feature Highlights */}
-        <div className="grid md:grid-cols-3 gap-6 text-center max-w-5xl w-full mb-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-1"> Smart Captions</h3>
-            <p>AI analyzes your photo, date & location to write journal-style entries.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-1"> Choose Your Style</h3>
-            <p>Customize tone, genre, and writing style from Shakespeare to Murakami.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-1"> Historical Context</h3>
-            <p>Get journal entries enriched with events from that day in history.</p>
-          </div>
-        </div>
+        {/* Feature Highlights Section */}
+<div className="border border-black rounded-lg p-8 max-w-6xl w-full text-center bg-white shadow-md mb-10">
+  <h2 className="text-3xl font-bold mb-6">Key Features</h2>
+  <div className="grid md:grid-cols-3 gap-6">
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">🧠</div>
+      <h3 className="text-xl font-semibold mb-1">Smart Captions</h3>
+      <p>AI analyzes your photo, date & location to write journal-style entries.</p>
+    </div>
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">🖋️</div>
+      <h3 className="text-xl font-semibold mb-1">Choose Your Style</h3>
+      <p>Customize tone, genre, and writing style from Shakespeare to Murakami.</p>
+    </div>
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">📚</div>
+      <h3 className="text-xl font-semibold mb-1">Historical Context</h3>
+      <p>Get journal entries enriched with events from that day in history.</p>
+    </div>
+  </div>
+</div>
+
+
 
         {/* How It Works Section */}
-        <div className="border border-black rounded-lg p-8 max-w-6xl w-full text-center bg-white shadow-md">
-          <h2 className="text-3xl font-bold mb-6"> How It Works</h2>
-          <div className="grid md:grid-cols-5 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-              <div className="text-3xl mb-1"></div>
-              <h3 className="text-lg font-semibold mb-1">1. Select a Photo</h3>
-              <p>Upload a photo from your device to begin your journal entry.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-              <div className="text-3xl mb-1"></div>
-              <h3 className="text-lg font-semibold mb-1">2. Choose Settings</h3>
-              <p>Pick your writing style, word count, and tone for personalized results.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-              <div className="text-3xl mb-1"></div>
-              <h3 className="text-lg font-semibold mb-1">3. Add Date & Location</h3>
-              <p>Set the scene so AI can add historical or cultural context.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-              <div className="text-3xl mb-1"></div>
-              <h3 className="text-lg font-semibold mb-1">4. Upload Photo</h3>
-              <p>Watch the magic! Your image gets a unique journal-style caption.</p>
-            </div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
-              <div className="text-3xl mb-1"></div>
-              <h3 className="text-lg font-semibold mb-1">5. Download or Share</h3>
-              <p>Save your entry, and share it.</p>
-            </div>
-          </div>
-        </div>
+<div className="border border-black rounded-lg p-8 max-w-6xl w-full text-center bg-white shadow-md">
+  <h2 className="text-3xl font-bold mb-6"> How It Works</h2>
+  <div className="grid md:grid-cols-5 gap-4">
+    
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">📸</div>
+      <h3 className="text-lg font-semibold mb-1">1. Select a Photo</h3>
+      <p>Upload a photo from your device to begin your journal entry.</p>
+    </div>
+
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">⚙️</div>
+      <h3 className="text-lg font-semibold mb-1">2. Choose Settings</h3>
+      <p>Pick your writing style, word count, and tone for personalized results.</p>
+    </div>
+
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">📍</div>
+      <h3 className="text-lg font-semibold mb-1">3. Add Date & Location</h3>
+      <p>Set the scene so AI can add historical or cultural context.</p>
+    </div>
+
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">✨</div>
+      <h3 className="text-lg font-semibold mb-1">4. Upload Photo</h3>
+      <p>Watch the magic! Your image gets a unique journal-style caption.</p>
+    </div>
+
+    <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+      <div className="text-3xl mb-1">💾</div>
+      <h3 className="text-lg font-semibold mb-1">5. Download or Share</h3>
+      <p>Save your entry, and share it.</p>
+    </div>
+    
+  </div>
+</div>
+
+
+        <section className="py-16 bg-white" id="pricing">
+  <div className="max-w-6xl mx-auto border border-black rounded-lg shadow-md p-10 bg-white">
+    <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">Choose Your Plan</h2>
+
+    <div className="flex flex-col md:flex-row justify-center gap-8">
+
+      {/* Free Plan */}
+      <div className="bg-gray-100 p-6 rounded-lg shadow-sm w-full md:w-1/2">
+        <h3 className="text-xl font-bold mb-2 text-gray-800">Free Plan</h3>
+        <p className="text-gray-600 mb-4">Perfect for testing things out.</p>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li>📸 <strong>5 photo uploads</strong> per month</li>
+          <li>✅ All core features included</li>
+          <li>🔒 No credit card required</li>
+        </ul>
+      </div>
+
+      {/* Pro Plan */}
+      <div className="bg-gray-100 p-6 rounded-lg shadow-sm w-full md:w-1/2">
+        <h3 className="text-xl font-bold mb-2 text-blue-700">Pro – $4.99/month</h3>
+        <p className="text-blue-700 mb-4">For active journalers and creative explorers.</p>
+        <ul className="text-sm text-blue-800 space-y-2">
+          <li>📸 <strong>200 photo uploads</strong> per month</li>
+          <li>✅ All core features included</li>
+          <li>🔓 Cancel anytime</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
 
         {/* Login or Sign Up */}
         {showLogin ? (
