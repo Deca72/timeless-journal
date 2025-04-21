@@ -29,7 +29,27 @@ const fontMap = {
   crimson: "'Crimson Text', serif",
 };
 
-export const downloadImageWithCaption = async (imageUrl, caption, imageName, fontKey = "") => {
+const backgroundStyleMap = {
+  default: "#ffffff",
+  parchment: "#fef9e7",         // 🟨 Light parchment yellow
+  retro: "#fdf6e3",
+  modern: "#eeeeee",
+  photojournal: "#fdfdfd",
+  pastel: "#ffe4e1",
+  sepia: "#f4ecd8",
+  notebook: "#fef3c7",
+  midnight: "#1e293b",
+  cream: "#fffdd0",
+  forest: "#e8f5e9",
+  corkboard: "#f5deb3",
+  canvas: "#f8f8f8",
+  foggy: "#e0e0e0",
+  sunset: "#ffe5b4",
+};
+
+
+
+export const downloadImageWithCaption = async (imageUrl, caption, imageName, fontKey, backgroundStyleKey = "") => {
   try {
     let isMobile = false;
 
@@ -46,7 +66,7 @@ export const downloadImageWithCaption = async (imageUrl, caption, imageName, fon
     const container = document.createElement("div");
     container.style.width = "600px";
     container.style.padding = "20px";
-    container.style.backgroundColor = "#ffffff";
+    container.style.backgroundColor = backgroundStyleMap[backgroundStyleKey] || "#ffffff";
     container.style.display = "flex";
     container.style.flexDirection = "column";
     container.style.alignItems = "center";

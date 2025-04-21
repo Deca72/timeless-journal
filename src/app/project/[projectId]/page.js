@@ -840,14 +840,20 @@ console.log("🧠 Loaded font style:", userPreferences.fontStyle);
 
   {/* Download Button */}
   <button
-    onClick={() =>
-      downloadImageWithCaption(url, caption, "journal-entry", userPreferences.fontStyle)
-    }
-    
-    className="px-4 py-2 bg-black text-white rounded hover:bg-green-600 transition"
-  >
-    ⬇️ Download
-  </button>
+  onClick={() =>
+    downloadImageWithCaption(
+      url,
+      caption,
+      "journal-entry",
+      userPreferences.fontStyle,
+      userPreferences.backgroundStyle // ✅ added this
+    )
+  }
+  className="px-4 py-2 bg-black text-white rounded hover:bg-green-600 transition"
+>
+  ⬇️ Download
+</button>
+
 
   {/* Delete Button */}
   <button
