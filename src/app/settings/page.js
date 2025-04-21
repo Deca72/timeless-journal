@@ -182,6 +182,24 @@ export default function Settings() {
   <option value="sans-serif">Sans-Serif (Arial, Helvetica)</option>
   <option value="typewriter">Typewriter (Courier New)</option>
   <option value="fancy">Fancy (Great Vibes)</option>
+  <option value="playfair">Playfair Display</option>
+<option value="merriweather">Merriweather</option>
+<option value="raleway">Raleway</option>
+<option value="lobster">Lobster</option>
+<option value="abril">Abril Fatface</option>
+<option value="poppins">Poppins</option>
+<option value="roboto">Roboto</option>
+<option value="inconsolata">Inconsolata</option>
+<option value="zeyada">Zeyada</option>
+<option value="archivo">Archivo</option>
+<option value="noto-serif">Noto Serif</option>
+<option value="noto-sans">Noto Sans</option>
+<option value="source-serif">Source Serif Pro</option>
+<option value="rubik">Rubik</option>
+<option value="space-mono">Space Mono</option>
+<option value="amatic">Amatic SC</option>
+<option value="fjalla">Fjalla One</option>
+<option value="crimson">Crimson Text</option>
 </select>
 
 
