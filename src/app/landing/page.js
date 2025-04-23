@@ -163,65 +163,76 @@ export default function LandingPage() {
 
         {/* Login or Sign Up */}
         {showLogin ? (
-          <form
-            onSubmit={handleLogin}
-            className="mt-10 bg-gray-100 text-black p-5 rounded-lg shadow-lg w-full max-w-md text-left"
-          >
-            <h2 className="text-xl font-bold mb-3">Login</h2>
-            {error && <p className="text-red-500 mb-2">{error}</p>}
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 mb-3 rounded border border-gray-300 bg-white"
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 mb-3 rounded border border-gray-300 bg-white"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded font-semibold"
-            >
-              Log In
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowLogin(false)}
-              className="w-full mt-3 text-sm text-blue-600 hover:underline"
-            >
-              Cancel
-            </button>
-          </form>
-        ) : (
-          <div className="mt-10 flex gap-4">
-  <a
-    href="/subscribe"
-    className="px-6 py-2 bg-white text-black border border-black rounded text-base font-semibold hover:bg-gray-100 transition"
+  <form
+    onSubmit={handleLogin}
+    className="mt-10 bg-gray-100 text-black p-5 rounded-lg shadow-lg w-full max-w-md text-left"
   >
-    Subscribe
-  </a>
-  <button
-    onClick={() => setShowLogin(true)}
-    className="px-6 py-2 bg-white text-black border border-black rounded text-base font-semibold hover:bg-gray-100 transition"
-  >
-    Login
-  </button>
-  <a
-    href="/signup"
-    className="px-6 py-2 bg-white text-black border border-black rounded text-base font-semibold hover:bg-gray-100 transition"
-  >
-    Sign Up
-  </a>
-</div>
+    <h2 className="text-xl font-bold mb-3">Login</h2>
+    {error && <p className="text-red-500 mb-2">{error}</p>}
 
-        )}
+    <input
+      type="email"
+      placeholder="Email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="w-full p-2 mb-3 rounded border border-gray-300 bg-white"
+      required
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      className="w-full p-2 mb-1 rounded border border-gray-300 bg-white"
+      required
+    />
+
+    {/* 🔗 Forgot Password Link */}
+    <div className="text-right mb-3">
+      <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+        Forgot password?
+      </a>
+    </div>
+
+    <button
+      type="submit"
+      className="w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded font-semibold"
+    >
+      Log In
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setShowLogin(false)}
+      className="w-full mt-3 text-sm text-blue-600 hover:underline"
+    >
+      Cancel
+    </button>
+  </form>
+) : (
+  <div className="mt-10 flex gap-4">
+    <a
+      href="/subscribe"
+      className="px-6 py-2 bg-white text-black border border-black rounded text-base font-semibold hover:bg-gray-100 transition"
+    >
+      Subscribe
+    </a>
+    <button
+      onClick={() => setShowLogin(true)}
+      className="px-6 py-2 bg-white text-black border border-black rounded text-base font-semibold hover:bg-gray-100 transition"
+    >
+      Login
+    </button>
+    <a
+      href="/signup"
+      className="px-6 py-2 bg-white text-black border border-black rounded text-base font-semibold hover:bg-gray-100 transition"
+    >
+      Sign Up
+    </a>
+  </div>
+)}
+
 
         {/* Footer */}
         <div className="mt-6 text-sm text-gray-500 text-center">
