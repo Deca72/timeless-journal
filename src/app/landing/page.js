@@ -234,6 +234,8 @@ export default function LandingPage() {
 )}
 
 
+
+
         {/* Footer */}
         <div className="mt-6 text-sm text-gray-500 text-center">
   <a href="/legal/terms" className="hover:underline">Terms of Service</a>
