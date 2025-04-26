@@ -124,6 +124,21 @@ export default function LandingPage() {
   </div>
 </div>
 
+{/* 📹 Add the YouTube Video Section */}
+<div className="border border-black rounded-lg p-8 max-w-6xl w-full text-center bg-white shadow-md mt-10">
+  <h2 className="text-3xl font-bold mb-6">Watch It In Action</h2>
+  <div className="relative" style={{ paddingBottom: "56.25%", height: 0 }}>
+    <iframe
+      src="https://www.youtube.com/embed/7l5EjZKaPv8"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+      title="Timeless Journal Demo Video"
+    ></iframe>
+  </div>
+</div>
+
 
         <section className="py-16 bg-white" id="pricing">
   <div className="max-w-6xl mx-auto border border-black rounded-lg shadow-md p-10 bg-white">
