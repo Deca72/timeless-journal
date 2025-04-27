@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Archivo&family=Abril+Fatface&family=Crimson+Text&family=Fjalla+One&family=Inconsolata&family=Lobster&family=Merriweather&family=Noto+Sans&family=Noto+Serif&family=Poppins&family=Playfair+Display&family=Raleway&family=Roboto&family=Rubik&family=Source+Serif+Pro&family=Space+Mono&family=Zeyada&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
