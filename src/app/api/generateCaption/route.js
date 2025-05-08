@@ -128,42 +128,32 @@ async function getPastCaptions(userId, projectId) {
 
 // ✅ Helper: Trim or validate word count and finish cleanly
 function enforceWordCount(text, min, max) {
-  const words = text.trim().split(/\s+/);
+  const sentences = text.match(/[^.!?]+[.!?]/g) || [];
+  let finalCaption = "";
+  let wordTotal = 0;
 
-  if (words.length < min) {
+  for (let sentence of sentences) {
+    const sentenceWords = sentence.trim().split(/\s+/).length;
+
+    if (wordTotal + sentenceWords <= max) {
+      finalCaption += sentence.trim() + " ";
+      wordTotal += sentenceWords;
+    } else {
+      break;
+    }
+  }
+
+  finalCaption = finalCaption.trim();
+  const finalWordCount = finalCaption.split(/\s+/).length;
+
+  if (finalWordCount < min) {
     return { valid: false, reason: "too short" };
   }
 
-  if (words.length > max) {
-    const sentences = text.match(/[^.!?]+[.!?]/g);
-    let finalCaption = "";
-    let totalWords = 0;
-
-    if (sentences && sentences.length > 0) {
-      for (let sentence of sentences) {
-        const sentenceWords = sentence.trim().split(/\s+/).length;
-        if (totalWords + sentenceWords <= max) {
-          finalCaption += sentence.trim() + " ";
-          totalWords += sentenceWords;
-        } else {
-          break;
-        }
-      }
-    } else {
-      // Fallback if no punctuation: trim by word count directly
-      return {
-        valid: true,
-        caption: words.slice(0, max).join(" "),
-      };
-    }
-
-    return {
-      valid: true,
-      caption: finalCaption.trim(),
-    };
-  }
-
-  return { valid: true, caption: text.trim() };
+  return {
+    valid: true,
+    caption: finalCaption,
+  };
 }
 
 
@@ -235,14 +225,16 @@ You are an AI that writes journal-style captions based ONLY on what's visible in
 
 DO NOT GUESS or ADD emotional content unless it’s directly tied to visible detail.
 
-🧠 Target Word Count: Around ${wordCount} words.
-Please keep the caption between ${wordCount - 5} and ${wordCount + 5} words as set by the user.
-${styleAndGenreGuide}
-
 🎨 The user selected:
 - Writing Style: ${writingStyle}
 - Genre: ${genre}
 Match this tone and voice in your writing. Do not just mention it — emulate it.
+
+🧠 Target Word Count: Around ${wordCount} words.
+❗ Your output MUST be between ${wordCount - 5} and ${wordCount + 5} words.
+Do NOT exceed this range. Use full, complete sentences — but stay within the word count limit.
+
+
 
 ---
 
