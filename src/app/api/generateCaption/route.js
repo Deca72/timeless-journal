@@ -50,7 +50,6 @@ async function getImageObjects(imageUrl) {
 }
 
 
-
 async function getImageDescription(imageUrl) {
   console.log("🔐 Replicate key loaded:", process.env.REPLICATE_API_KEY ? "✅ present" : "❌ missing");
   console.log("DEBUG: Raw REPLICATE key:", process.env.REPLICATE_API_KEY);
@@ -130,21 +129,32 @@ async function getPastCaptions(userId, projectId) {
 // ✅ Helper: Trim or validate word count and finish cleanly
 function enforceWordCount(text, min, max) {
   const words = text.trim().split(/\s+/);
-  if (words.length < min) return { valid: false, reason: "too short" };
+
+  if (words.length < min) {
+    return { valid: false, reason: "too short" };
+  }
 
   if (words.length > max) {
     const sentences = text.match(/[^.!?]+[.!?]/g);
     let finalCaption = "";
     let totalWords = 0;
 
-    for (let sentence of sentences || []) {
-      const sentenceWords = sentence.trim().split(/\s+/).length;
-      if (totalWords + sentenceWords <= max) {
-        finalCaption += sentence.trim() + " ";
-        totalWords += sentenceWords;
-      } else {
-        break;
+    if (sentences && sentences.length > 0) {
+      for (let sentence of sentences) {
+        const sentenceWords = sentence.trim().split(/\s+/).length;
+        if (totalWords + sentenceWords <= max) {
+          finalCaption += sentence.trim() + " ";
+          totalWords += sentenceWords;
+        } else {
+          break;
+        }
       }
+    } else {
+      // Fallback if no punctuation: trim by word count directly
+      return {
+        valid: true,
+        caption: words.slice(0, max).join(" "),
+      };
     }
 
     return {
@@ -155,6 +165,7 @@ function enforceWordCount(text, min, max) {
 
   return { valid: true, caption: text.trim() };
 }
+
 
 // ✅ Generate AI-Powered Captions with Object Validation
 export async function POST(req) {
