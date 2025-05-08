@@ -2,6 +2,7 @@ import { OpenAI } from "openai";
 import fetch from "node-fetch";
 import { adminDb } from "../../lib/firebase-admin";
 import { collection, getDocs } from "firebase/firestore";
+import Replicate from "replicate";
 
 export const runtime = "nodejs";
 export const maxDuration = 25; // Allow up to 25 seconds
@@ -15,7 +16,6 @@ async function getImageObjects(imageUrl) {
   const HF_API_URL = "https://api-inference.huggingface.co/models/facebook/detr-resnet-50";
   const HF_API_KEY = process.env.HUGGINGFACE_API_KEY;
 
-
   try {
     const response = await fetch(HF_API_URL, {
       method: "POST",
@@ -26,13 +26,21 @@ async function getImageObjects(imageUrl) {
       body: JSON.stringify({ inputs: imageUrl }),
     });
 
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      const text = await response.text();
+      console.error("❌ Hugging Face returned non-JSON:", text);
+      return [];
+    }
+
     const data = await response.json();
+
     if (!data || !Array.isArray(data)) {
       console.error("❌ Invalid Object Detection Response:", data);
       return [];
     }
 
-    const objects = data.map((obj) => obj.label).slice(0, 5); // Take top 5 detected objects
+    const objects = data.map((obj) => obj.label).slice(0, 5);
     console.log("📝 Detected Objects:", objects);
     return objects;
   } catch (error) {
@@ -41,36 +49,37 @@ async function getImageObjects(imageUrl) {
   }
 }
 
-// ✅ Function to get image description using Hugging Face API
+
+
 async function getImageDescription(imageUrl) {
-  const HF_API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-large";
+  console.log("🔐 Replicate key loaded:", process.env.REPLICATE_API_KEY ? "✅ present" : "❌ missing");
+  console.log("DEBUG: Raw REPLICATE key:", process.env.REPLICATE_API_KEY);
 
-  const HF_API_KEY = process.env.HUGGINGFACE_API_KEY; // ✅ Correct
-
+  const replicate = new Replicate({ auth: process.env.REPLICATE_API_KEY });
 
   try {
-    const response = await fetch(HF_API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${HF_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ inputs: imageUrl }),
-    });
-
-    const data = await response.json();
-    if (!data || !Array.isArray(data) || !data[0]?.generated_text) {
-      console.error("❌ Invalid Image Description Response:", data);
-      return "No description available.";
-    }
-
-    console.log("✅ Image Description:", data[0].generated_text);
-    return data[0].generated_text;
-  } catch (error) {
-    console.error("❌ Error fetching image description:", error);
+    const output = await replicate.run(
+      "salesforce/blip:2e1dddc8621f72155f24cf2e0adbde548458d3cab9f00c0139eea840d0ac4746",
+      {
+        input: {
+          task: "image_captioning",
+          image: imageUrl,
+        },
+      }
+    );
+    
+    
+    console.log(output);("✅ Image Description:", output);
+    return output;
+  } catch (err) {
+    console.error("❌ Error using Replicate API:", err);
     return "No description available.";
   }
 }
+
+
+
+
 
 // ✅ Fetch historical events from Wikipedia API
 async function fetchHistoricalEvents(date) {
